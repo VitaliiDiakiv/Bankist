@@ -61,66 +61,37 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-// LECTURES
+const displayMovements = function (movements) {
+  containerMovements.innerHTML = '';
+  movements.forEach((mov, i) => {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
 
-/////////////////////////////////////////////////
+    const html = `
+    <div class="movements__row">
+      <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+      <div class="movements__value">${mov}</div>
+    </div>`;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
 
-// let arr = ['a', 'b', 'c', 'd', 'e'];
+displayMovements(account1.movements);
 
-// //SLICE
-// console.log(arr.slice(2, 4));
-// console.log(arr.slice(-1));
+const calcPrintBalance = function (arr) {
+  const balance = arr.reduce((acc, el) => acc + el, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
 
-// //SPLICE
-// arr;
-// console.log(arr.splice(-1));
-// arr;
-
-// arr = ['a', 'b', 'c', 'd', 'e'];
-
-// //REVERSE
-// console.log(arr.reverse());
-
-// //Concat
-
-// let arr1 = [1, 2, 3];
-// let arr2 = [4, 5, 6];
-
-// console.log(arr1.concat(arr2));
-
-// //Join
-// console.log(arr1.join(' - '));
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-for (let movement of movements) {
-  console.log(
-    movement > 0
-      ? `You deposited ${movement}`
-      : `You withdrew ${Math.abs(movement)}`
-  );
-}
-
-movements.forEach((movement, index, array) => {
-  console.log(
-    movement > 0
-      ? `Movement ${index + 1}: You deposited ${movement}`
-      : `Movement ${index + 1}: You withdrew ${Math.abs(movement)}`
-  );
-});
-
-//Foreach in Map and Set
-
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
-
-currencies.forEach((value, key, map) => console.log(`${key} ${value}`));
-
-const currenciesUnique = new Set(['USD', 'EUR', 'GBP']);
-console.log(currenciesUnique);
-
-currenciesUnique.forEach((value, _, map) => console.log(` ${value}`));
+calcPrintBalance(account1.movements);
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(el => el.slice(0, 1))
+      .join('');
+  });
+};
+createUsernames(accounts);
