@@ -286,3 +286,33 @@ const dogsSortedCopy = dogs
   .sort((a, b) => a.recommendedFood - b.recommendedFood);
 console.log(dogsCopy);
 // console.log(dogsCopy);
+
+// ----THEME---- Dates an time
+
+const now = new Date();
+console.log(now);
+
+// const now = new Date();
+// console.log(now);
+
+// // console.log(new Date(''));
+// console.log(new Date(account1.movementsDates[0]));
+
+// const future = new Date(2037, 10, 19, 15, 23);
+// console.log(future);
+// console.log(future.getFullYear());
+// console.log(future.getMonth());
+// console.log(future.getDate());
+// console.log(future.getDay());
+// console.log(future.getHours());
+// console.log(future.getMinutes());
+// console.log(future.getSeconds());
+// console.log(future.toISOString());
+
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(+future);
+
+const daysPassed = (date1, date2) =>
+  Math.abs(date2 - date1) / (1000 * 60 * 60 * 24);
+
+console.log(daysPassed(new Date(2037, 3, 4), new Date(2037, 3, 14)));
